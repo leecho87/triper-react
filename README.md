@@ -21,6 +21,8 @@ $ npm run start     // 프로젝트 시작 (localhost:3000)
 - [emotion](https://emotion.sh/docs/install)
 - [swiper](https://swiperjs.com/react)
 - [classnames](https://www.npmjs.com/package/classnames)
+- [typescript](https://www.typescriptlang.org/)
+
 
 ### API
 - `국문 관광정보 서비스` (한국관광공사)
@@ -31,6 +33,3 @@ $ npm run start     // 프로젝트 시작 (localhost:3000)
 ### Credit
 - [leecho87_front](https://github.com/leecho87)
 - [yops_back](https://github.com/leaveittogod0123)
-
-### LOG
-- 프로젝트 구성 (21.01.26)

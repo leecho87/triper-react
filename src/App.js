@@ -1,17 +1,18 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import "./App.css";
+import Intro from './components/Intro';
+import requestAPI from './service/Service';
+import serviceList from './service/ServiceList';
 
 function App() {
-
-    console.log(process.env)
-console.log(process.env.REACT_APP_TOUR)
-console.log(process.env.REACT_APP_PICTURE)
-console.log(process.env.REACT_APP_WEATHER)
-
+    requestAPI()
 
     return (
-        <div className="App">APP</div>
+        <div className="App">
+            APP
+            <Intro />
+        </div>
     );
 }
 
