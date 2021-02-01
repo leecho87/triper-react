@@ -30,6 +30,15 @@ $ npm run start     // 프로젝트 시작 (localhost:3000)
 - `동네예보 조회서비스` (기상청)
 
 
-### Credit
-- [leecho87_front](https://github.com/leecho87)
-- [yops_back](https://github.com/leaveittogod0123)
+### Creator
+- `leecho87` - https://github.com/leecho87
+- `yops` - https://github.com/leaveittogod0123
+
+---
+###### 필요구성
+1. 회원
+    - 즐겨찾기
+    - 문의하기
+    - 메모하기
+1. 현 위치 기준 날씨정보
+1. 현 위치 기준 지도 (마커)

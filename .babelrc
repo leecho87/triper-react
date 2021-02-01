@@ -6,6 +6,9 @@
                 "autoLabel": "dev-only",
                 "labelFormat": "[filename]--[local]"
             }
-        ]
-    ]
+        ],
+        ["es2016"],
+        "react"
+    ],
+    "plugins": ["babel-plugin-transform-class-properties"]
 }
