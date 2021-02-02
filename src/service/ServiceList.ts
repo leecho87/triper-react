@@ -56,4 +56,44 @@ const serviceList = {
     },
 }
 
-export default serviceList
+
+const serviceTypeId = {
+    12: {
+        contentName: '관광지',
+        contentCode: 'attraction'
+    },
+    14: {
+        contentName: '문화시설',
+        contentCode: 'culture'
+    },
+    15: {
+        contentName: '행사/공연/축제',
+        contentCode: 'festival'
+    },
+    25: {
+        contentName: '여행코스',
+        contentCode: 'course'
+    },
+    28: {
+        contentName: '레포츠',
+        contentCode: 'reports'
+    },
+    32: {
+        contentName: '숙박',
+        contentCode: 'lodge'
+    },
+    38: {
+        contentName: '쇼핑',
+        contentCode: 'shopping'
+    },
+    39: {
+        contentName: '음식점',
+        contentCode: 'restaurant'
+    }
+}
+
+
+export {
+    serviceList as default,
+    serviceTypeId
+}
