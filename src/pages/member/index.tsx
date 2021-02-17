@@ -1,11 +1,9 @@
-/** @jsxImportSource @emotion/react */
-import { jsx } from "@emotion/react";
-import { defaultStyle } from './style';
+import React from 'react';
 
-const MemberMain:React.FC = () => {
+const Member:React.FC = () => {
     return (
-        <div css={defaultStyle}>MemberMain</div>
+        <div>Member</div>
     )
 }
 
-export default MemberMain;
+export default Member;

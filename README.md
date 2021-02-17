@@ -2,7 +2,7 @@
 
 
 ## 프로젝트
-React 기반 여행 찾기 토이 프로젝트
+create-react-app + typescript 국내여행지 찾기 토이 프로젝트
 
 ## 추가 패키지
 - recoil ([https://recoiljs.org](https://recoiljs.org)) - React 상태관리 패키지

@@ -17,8 +17,7 @@ time, mark, audio, video {
 	margin: 0;
 	padding: 0;
 	border: 0;
-	font-size: 100%;
-    vertical-align: baseline;
+	font-size: 15px;
     font-family: 'Nanum Gothic', sans-serif;
 }
 /* HTML5 display-role reset for older browsers */
@@ -27,9 +26,9 @@ footer, header, hgroup, menu, nav, section {
     box-sizing:border-box;
     display: block;
 }
-body {
-    line-height: 1;
-    font-family: 'Nanum Gothic', sans-serif;
+html,body {
+    height:100%;
+    min-height:100%;
 }
 ol, ul {
 	list-style: none;
@@ -59,4 +58,8 @@ button:focus {
 }
 img {
     vertical-align:top;
+}
+a {
+    text-decoration:none;
+    color:#333;
 }
