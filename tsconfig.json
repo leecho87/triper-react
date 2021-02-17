@@ -1,6 +1,7 @@
 {
+  "extends": "./tsconfig.paths.json",
   "compilerOptions": {
-    "baseUrl": "./",
+    "baseUrl": "./src",
     "types": [
       "react"
     ],
@@ -9,7 +10,11 @@
     "lib": [
       "dom",
       "dom.iterable",
-      "esnext"
+      "esnext",
+      "es5",
+      "es2015",
+      "es2015.promise",
+      "es2016"
     ],
     "allowJs": true,
     "skipLibCheck": true,
@@ -26,6 +31,7 @@
     "jsx": "react-jsx"
   },
   "include": [
-    "src"
+    "src",
+    "tsconfig.paths.json"
   ]
 }

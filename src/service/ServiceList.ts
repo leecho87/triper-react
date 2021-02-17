@@ -57,36 +57,36 @@ const serviceList = {
 }
 
 
-const serviceTypeId = {
-    12: {
+const contentIdList: {[key:string]: any} = {
+    '12': {
         contentName: '관광지',
         contentCode: 'attraction'
     },
-    14: {
+    '14': {
         contentName: '문화시설',
         contentCode: 'culture'
     },
-    15: {
+    '15': {
         contentName: '행사/공연/축제',
         contentCode: 'festival'
     },
-    25: {
+    '25': {
         contentName: '여행코스',
         contentCode: 'course'
     },
-    28: {
+    '28': {
         contentName: '레포츠',
         contentCode: 'reports'
     },
-    32: {
+    '32': {
         contentName: '숙박',
         contentCode: 'lodge'
     },
-    38: {
+    '38': {
         contentName: '쇼핑',
         contentCode: 'shopping'
     },
-    39: {
+    '39': {
         contentName: '음식점',
         contentCode: 'restaurant'
     }
@@ -95,5 +95,5 @@ const serviceTypeId = {
 
 export {
     serviceList as default,
-    serviceTypeId
+    contentIdList
 }

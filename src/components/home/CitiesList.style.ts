@@ -24,8 +24,15 @@ export const CitiesListStyle = css`
             margin-left:0;
         }
 
+        &.active {            
+            img {
+                opacity:1;
+            }
+        }
+
         img {
-            width:100px;
+            width:120px;
+            opacity:.7;
         }
 
         .text {
@@ -33,7 +40,7 @@ export const CitiesListStyle = css`
             left:10px;
             bottom:10px;
             font-weight:bold;
-            font-size:13px;
+            font-size:14px;
             color:#fff;
         }
     }

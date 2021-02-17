@@ -2,12 +2,10 @@
 import { useState, useEffect } from 'react';
 import "./App.css";
 import requestAPI, { requestAll } from './service/Service';
-import serviceList, { serviceTypeId } from './service/ServiceList';
+import serviceList, { contentIdList } from './service/ServiceList';
 
 import Intro from './components/common/Intro';
 import CitiesList from './components/home/CitiesList';
-import { isTemplateSpan } from 'typescript';
-
 
 interface ICitiesItem {
     code: Number;
@@ -20,7 +18,7 @@ interface IGeoLocation {
     longitude: number;
 }
 
-const App: React.FC = () => {
+const App: React.FC<any> = () => {
     const [ userLocation, setUserLocation ] = useState<IGeoLocation>({ latitude : 0, longitude : 0 });
     const getGeoLocation = () => {
         navigator.geolocation.getCurrentPosition((pos) => {
@@ -32,14 +30,7 @@ const App: React.FC = () => {
     }
 
     const [ cities, setCities ] = useState<ICitiesItem[]>([]);
-    const [ attraction, setAttraction ] = useState();
-    const [ culture, setCulture ] = useState();
-    const [ festival, setFestival ] = useState();
-    const [ course, setCourse ] = useState();
-    const [ reports, setReports ] = useState();
-    const [ lodge, setLodge ] = useState();
-    const [ shopping, setShopping ] = useState();
-    const [ restaurant, setRestaurant ] = useState();
+    const [ mainItems, setMainItems ] = useState({});
 
     const fetchCities = async () => {
         const data = await requestAPI({
@@ -62,41 +53,27 @@ const App: React.FC = () => {
             { service: serviceList.areaBasedList, param: { contentTypeId: 39 } },
         ]);
 
-        const resData = setDataId(resAll);
-
-        assignData(resData);
+        const resData = setDataNameAdd(resAll);
     }
 
-    const setDataId = (data: any) => {
-        const dataAll: any = [];
-        data.map((item: any) => {
-            const id = item.config.params.contentTypeId;
-            const { items } = item.data.response.body;
-            dataAll.push({...items, id});
-        });
-        return dataAll;
-    }
+    const setDataNameAdd = (data: any) => {
+        const mergeData:{[key: string]: any} = {};
 
-    const assignData = (data: any) => {
-        data && data.map((item: any) => {
-            const items = item.item;
-            if ( item.id === 12 ) setAttraction(items);
-            if ( item.id === 14 ) setCulture(items);
-            if ( item.id === 15 ) setFestival(items);
-            if ( item.id === 25 ) setCourse(items);
-            if ( item.id === 28 ) setReports(items);
-            if ( item.id === 32 ) setLodge(items);
-            if ( item.id === 38 ) setShopping(items);
-            if ( item.id === 39 ) setRestaurant(items);
+        data.forEach((items: any) => {
+            const id = items.config.params.contentTypeId.toString();
+            const contentCode = contentIdList[id].contentCode;
+            const { item } = items.data.response.body.items;
+            return mergeData[contentCode] = item;
         });
-    };
+
+        setMainItems(mergeData);
+    }
 
     useEffect(() => {
         fetchCities();
         fetchMainContents();
         getGeoLocation();
     }, []);
-
 
     return (
         <div className="App">
