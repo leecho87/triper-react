@@ -5,11 +5,9 @@ import Container from '@layout/Container';
 
 const App = () => {
     return (
-        <>
-            <Container>
-                <Router />
-            </Container>
-        </>
+        <Container>
+            <Router />
+        </Container>
     )
 }
 
