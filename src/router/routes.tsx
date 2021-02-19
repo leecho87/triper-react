@@ -9,17 +9,24 @@ const ROUTES = [
         component: pages.Home
     },
     {
-        key: "MEMBER",
-        path: "/member",
-        exact: true,
-        title: "회원",
-        component: pages.Member
-    },
-    {
         key: "SEARCH",
         path: "/search",
         exact: true,
         title: "검색",
+        component: pages.Search
+    },
+    {
+        key: "LOCATION",
+        path: "/location",
+        exact: true,
+        title: "주변",
+        component: pages.Search
+    },
+    {
+        key: "MEMBER",
+        path: "/member",
+        exact: true,
+        title: "내정보",
         component: pages.Search
     },
 ];

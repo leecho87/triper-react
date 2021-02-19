@@ -12,6 +12,8 @@ const ContainerWrapper = styled.div`
 
     .container {
         flex:1;
+        overflow-x:hidden;
+        overflow-y:auto;
     }
 `;
 
@@ -25,12 +27,14 @@ const Container = ({children}: any) => {
                 <meta property="og:site_name" content="트라이퍼" />
                 <meta property="og:type" content="website" />
             </Helmet>
+
             <div className="container">
                 {children}
             </div>
+            
             <NavBar />
         </ContainerWrapper>
     )
 }
 
-export default Container
+export default Container;

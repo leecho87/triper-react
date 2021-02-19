@@ -5,7 +5,13 @@ import styled from 'styled-components';
 import requestAPI, { requestAll } from '@service/Service';
 import serviceList, { contentIdList } from '@service/ServiceList';
 
-import CitiesList from '@components/home/CitiesList';
+import { ItemList } from '@components/common'
+import { CitiesList } from '@components/home'
+
+interface IGeoLocation {
+    latitude: number;
+    longitude: number;
+}
 
 interface ICitiesItem {
     code: Number;
@@ -13,9 +19,23 @@ interface ICitiesItem {
     rnum: Number;
 }
 
-interface IGeoLocation {
-    latitude: number;
-    longitude: number;
+interface ICourceProps {
+    areacode: number;
+    cat1: string;
+    cat2: string;
+    cat3: string;
+    contentid: number;
+    contenttypeid: number;
+    createdtime: number;
+    firstimage:string;
+    firstimage2:string;
+    mapx: number;
+    mapy: number;
+    mlevel: number;
+    modifiedtime: number;
+    readcount: number;
+    sigungucode: number;
+    title:string;
 }
 
 const Home: React.FC = () => {
@@ -29,17 +49,27 @@ const Home: React.FC = () => {
     //     });        
     // }
 
-    // const [ cities, setCities ] = useState<ICitiesItem[]>([]);
+    const [ cities, setCities ] = useState<ICitiesItem[]>([]);
+    const [ course, setCourse ] = useState<ICourceProps[]>([]);
     // const [ mainItems, setMainItems ] = useState({});
 
-    // const fetchCities = async () => {
-    //     const data = await requestAPI({
-    //         service: serviceList.areaCode,
-    //         param: { numOfRows: 17 }
-    //     });
-    //     const { item } = data.data.response.body.items;
-    //     setCities(item);
-    // };
+    const fetchCities = async () => {
+        const data = await requestAPI({
+            service: serviceList.areaCode,
+            param: { numOfRows: 17 }
+        });
+        const { item } = data.data.response.body.items;
+        setCities(item);
+    };
+
+    const fetchCourse = async () => {
+        const data = await requestAPI({
+            service: serviceList.areaBasedList,
+            param: { contentTypeId: 25 }
+        });
+        const { item } = data.data.response.body.items;
+        setCourse(item);
+    };
 
     // const fetchMainContents = async () => {
     //     const resAll = await requestAll([
@@ -74,17 +104,19 @@ const Home: React.FC = () => {
     //     setMainItems(mergeData);
     // }
 
-    // useEffect(() => {
-    //     fetchCities();
-    //     fetchMainContents();
-    //     getGeoLocation();
-    // },[]);
+    useEffect(() => {
+        fetchCities();
+        fetchCourse();
+        // fetchMainContents();
+        // getGeoLocation();
+    },[]);
 
     return (
-        <div className="App">
-            Home
-            {/* { cities && cities.length > 0 && <CitiesList data={cities} /> } */}
-        </div>
+        <>
+            { cities && cities.length > 0 && <CitiesList title={'관심지역 둘러보기'} data={cities} /> }
+
+            <ItemList title={'방구석 랜선 여행코스'} data={course} />
+        </>
     );
 }
 
