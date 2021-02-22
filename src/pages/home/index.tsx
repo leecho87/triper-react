@@ -42,15 +42,16 @@ const Home: React.FC = () => {
     // const [ userLocation, setUserLocation ] = useState<IGeoLocation>({ latitude : 0, longitude : 0 });
     // const getGeoLocation = () => {
     //     navigator.geolocation.getCurrentPosition((pos) => {
-    //         setUserLocation({ 
-    //             latitude: pos.coords.latitude, 
+    //         setUserLocation({
+    //             latitude: pos.coords.latitude,
     //             longitude: pos.coords.longitude
     //         });
-    //     });        
+    //     });
     // }
 
     const [ cities, setCities ] = useState<ICitiesItem[]>([]);
     const [ course, setCourse ] = useState<ICourceProps[]>([]);
+    const [ attraction, setAttraction ] = useState<any>([]);
     // const [ mainItems, setMainItems ] = useState({});
 
     const fetchCities = async () => {
@@ -60,6 +61,15 @@ const Home: React.FC = () => {
         });
         const { item } = data.data.response.body.items;
         setCities(item);
+    };
+
+    const fetchAttraction = async () => {
+        const data = await requestAPI({
+            service: serviceList.areaBasedList,
+            param: { contentTypeId: 12 }
+        });
+        const { item } = data.data.response.body.items;
+        setAttraction(item);
     };
 
     const fetchCourse = async () => {
@@ -106,6 +116,7 @@ const Home: React.FC = () => {
 
     useEffect(() => {
         fetchCities();
+        fetchAttraction();
         fetchCourse();
         // fetchMainContents();
         // getGeoLocation();
@@ -114,6 +125,8 @@ const Home: React.FC = () => {
     return (
         <>
             { cities && cities.length > 0 && <CitiesList title={'관심지역 둘러보기'} data={cities} /> }
+
+            <ItemList title={'최근 즐거운 관광지'} data={attraction} />
 
             <ItemList title={'방구석 랜선 여행코스'} data={course} />
         </>

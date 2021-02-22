@@ -74,7 +74,7 @@ const CitiesList: React.FC<IProps> = ({ title, data }) => {
                     data.map((item: ICitiesItem, index: number) => (
                         <button type="button" key={`citeis_${index}`} className={index === 0 ? "active" : undefined}>
                             <img
-                                src={`/images/home/cities/city_${item.code}.jpg`}
+                                src={`/images/home/city_${item.code}.jpg`}
                                 alt={`${item.name === "세종특별자치시" ? "세종시" : item.name }`}
                             />
                             <span className="text">

@@ -15,7 +15,12 @@ interface IItemListStyleProps {
 
 const ItemListWrapper = styled.article<IItemListStyleProps>`
     position:relative;
-
+    margin-top:0;
+    border-top:10px solid #f7f7f7;
+    padding:25px 0 0;
+    &:not(:first-of-type) {
+        margin-top:40px;
+    }
     // &:before {
     //     content:'';
     //     z-index:-1;
@@ -26,15 +31,17 @@ const ItemListWrapper = styled.article<IItemListStyleProps>`
     //     left:0;
     //     background-image:${props => `url(/images/home/bg_${props.bgCode}.png)`};
     //     background-size:cover;
+    //     opacity:.8;
     // }
 
     .listBox {
         display:flex;
         flex-wrap:no-wrap;
-        position:relative;
         overflow-x: auto;
         overflow-y: hidden;
-        padding:20px 15px 40px;
+        position:relative;
+        padding:20px 15px 0;
+
         &::-webkit-scrollbar {
             display:none;
         }
@@ -44,12 +51,12 @@ const ItemListWrapper = styled.article<IItemListStyleProps>`
         }
 
         .item {
-            flex:1;
-            padding:6px;
-            box-shadow:2px 2px 4px 0 rgba(0, 0, 0, .2);
+            background-color:#fff;
+
             &:not(:first-of-type) {
                 margin-left:12px;
             }
+
             img {
                 width:180px;
                 height:120px;
@@ -68,18 +75,23 @@ const ItemListWrapper = styled.article<IItemListStyleProps>`
                 background-color:#bbb;
             }
             .title {
+                overflow:hidden;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                height:50px;
                 padding:6px 0 4px;
                 font-size:14px;
                 line-height:1.5;
             }
-
             .read {
-                text-align:right;
+                padding:4px 0 0;
                 font-size:12px;
+                color:#999;
                 img {
                     width:16px;
                     height:16px;
-                    margin-left:6px;
+                    margin-right:2px;
                 }
             }
         }
@@ -88,15 +100,24 @@ const ItemListWrapper = styled.article<IItemListStyleProps>`
     .more {
         position:absolute;
         right:15px;
-        top:18px;
+        top:46px;
         font-size:13px;
-        color:#999;
+        color:#888;
+        &:after {
+            content:'';
+            display:inline-block;
+            width:5px;
+            height:5px;
+            margin:5px 0 0 4px;
+            border-top:1px solid #888;
+            border-right:1px solid #888;
+            transform:rotate(45deg);
+            vertical-align:top;
+        }
     }
 `
 
 const ItemList: React.FC<IItemListProps> = ({ title, data }) => {
-    console.log('itemList', data);
-
     return (
         <ItemListWrapper bgCode={data[0]?.contenttypeid}>
             <ArticleTitle>{title}</ArticleTitle>
@@ -111,13 +132,13 @@ const ItemList: React.FC<IItemListProps> = ({ title, data }) => {
                         )}
                         <p className="title">{item.title}</p>
                         <p className="read">
-                            {item.readcount} <img src="/images/common/read.png" alt=""/>
+                        <img src="/images/common/read.png" alt=""/> {item.readcount}
                         </p>
                     </div>
                 ))}
                 </div>
             </div>
-            <Link to="/" className="more">자세히보기</Link>
+            <Link to="/" className="more">자세히</Link>
         </ItemListWrapper>
     );
 };

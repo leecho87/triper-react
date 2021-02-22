@@ -8,11 +8,20 @@ interface IArticleTitleProps {
 
 const TitleEl = styled.h1<any>`
     position:relative;
-    padding:15px 15px 0;
-    font-size:22px;
+    padding:15px 0 0 25px;
+    font-size:20px;
     font-weight:bold;
     letter-spacing:-1.5px;
     color:${props => props.color};
+    &:before {
+        content:'';
+        position:absolute;
+        left:14px;
+        bottom:0;
+        width:3px;
+        height:calc(100% - 16px);
+        background-color:#ddd;
+    }
 `
 
 const ArticleTitle:React.FC<IArticleTitleProps> = ({
