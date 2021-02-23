@@ -72,7 +72,7 @@ const Home: React.FC = () => {
         <>
             <Top />
             { cities && cities.length > 0 && <CitiesList title={'관심지역 둘러보기'} data={cities} /> }
-            { attraction && attraction.length > 0 &&  <ItemList title={'최근에 등록된 관광지'} data={attraction} type={'swipe'} /> }
+            { attraction && attraction.length > 0 &&  <ItemList title={'최근에 등록된 관광지'} data={attraction} first={true} type={'swipe'} /> }
             { culture && culture.length > 0 && <ItemList title={'알아가요 우리문화'} data={culture} type={'list'} /> }
             { festival && festival.length > 0 && <ItemList title={'화면으로 행사 구경하기'} data={festival} type={'swipe'} /> }
             { course && course.length > 0 && <ItemList title={'방구석 랜선 여행코스'} data={course} type={'swipe'} /> }

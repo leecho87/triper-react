@@ -21,9 +21,11 @@ const TopWrapper = styled.article`
         position:absolute;
         left:20px;
         top:20px;
-        font-size:22px;
+        font-size:26px;
+        // letter-spacing:-2px;
+        font-family:'Fredoka One';
+        text-shadow:1px 1px 2px #000, 2px 2px 4px #fff;
         color:#fff;
-        text-shadow:1px 1px 3px #fff;
     }
 
     .searchLink {

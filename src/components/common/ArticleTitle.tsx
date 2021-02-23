@@ -9,7 +9,7 @@ interface IArticleTitleProps {
 const TitleEl = styled.h1<any>`
     position:relative;
     padding:15px 0 0 25px;
-    font-size:20px;
+    font-size:18px;
     font-weight:bold;
     letter-spacing:-1.5px;
     color:${props => props.color};

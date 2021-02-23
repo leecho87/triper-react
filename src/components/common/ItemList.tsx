@@ -8,6 +8,7 @@ import classNames from "classnames";
 interface IItemListProps {
     title?: string;
     data?: any;
+    first?: boolean;
     type?: string;
 }
 
@@ -17,11 +18,11 @@ interface IItemListStyleProps {
 
 const ItemListWrapper = styled.article<IItemListStyleProps>`
     position:relative;
-    margin-top:0;
+    margin-top:40px;
     border-top:10px solid #f7f7f7;
     padding:25px 0 0;
-    &:not(:first-of-type) {
-        margin-top:40px;
+    &.first {
+        margin-top:25px;
     }
     // &:before {
     //     content:'';
@@ -147,9 +148,9 @@ const ItemListWrapper = styled.article<IItemListStyleProps>`
     }
 `
 
-const ItemList: React.FC<IItemListProps> = ({ title, data, type = 'swipe' }) => {
+const ItemList: React.FC<IItemListProps> = ({ title, data, first=false, type = 'swipe' }) => {
     return (
-        <ItemListWrapper bgCode={data[0]?.contenttypeid}>
+        <ItemListWrapper bgCode={data[0]?.contenttypeid} className={first ? "first" : undefined}>
             <ArticleTitle>{title}</ArticleTitle>
             <div className={classNames(["listArea", type])}>
             { data && data.length > 0 && data.map((item:any, index:number) => (
