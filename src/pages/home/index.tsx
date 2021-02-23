@@ -5,7 +5,7 @@ import serviceList, { contentIdList } from '@service/ServiceList';
 import fetchAPI from '@pages/home/service';
 
 import { ItemList } from '@components/common'
-import { Search, CitiesList } from '@components/home'
+import { Top, CitiesList } from '@components/home'
 
 import { IGeoLocation, ICitiesItem , ICourceProps } from '@pages/home/interface';
 
@@ -32,7 +32,6 @@ const Home: React.FC = () => {
         const data = await fetchAPI(serviceList.areaCode, { numOfRows: 17 })
         setCities(data);
     };
-
     const fetchAttraction = async () => {
         const data = await fetchAPI(serviceList.areaBasedList, { contentTypeId: contentIdList['attraction'].code} )
         setAttraction(data);
@@ -71,8 +70,7 @@ const Home: React.FC = () => {
 
     return (
         <>
-            <Search />
-
+            <Top />
             { cities && cities.length > 0 && <CitiesList title={'관심지역 둘러보기'} data={cities} /> }
             { attraction && attraction.length > 0 &&  <ItemList title={'최근에 등록된 관광지'} data={attraction} type={'swipe'} /> }
             { culture && culture.length > 0 && <ItemList title={'알아가요 우리문화'} data={culture} type={'list'} /> }

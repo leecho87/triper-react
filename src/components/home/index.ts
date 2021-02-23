@@ -1,7 +1,7 @@
 import CitiesList from '@components/home/CitiesList';
-import Search from '@components/home/Search';
+import Top from '@components/home/Top';
 
 export {
     CitiesList,
-    Search
+    Top
 }
