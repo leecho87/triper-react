@@ -1,134 +1,85 @@
-import React from 'react';
-import { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-
-import requestAPI, { requestAll } from '@service/Service';
 import serviceList, { contentIdList } from '@service/ServiceList';
 
+import fetchAPI from '@pages/home/service';
+
 import { ItemList } from '@components/common'
-import { CitiesList } from '@components/home'
+import { Search, CitiesList } from '@components/home'
 
-interface IGeoLocation {
-    latitude: number;
-    longitude: number;
-}
-
-interface ICitiesItem {
-    code: Number;
-    name: String;
-    rnum: Number;
-}
-
-interface ICourceProps {
-    areacode: number;
-    cat1: string;
-    cat2: string;
-    cat3: string;
-    contentid: number;
-    contenttypeid: number;
-    createdtime: number;
-    firstimage:string;
-    firstimage2:string;
-    mapx: number;
-    mapy: number;
-    mlevel: number;
-    modifiedtime: number;
-    readcount: number;
-    sigungucode: number;
-    title:string;
-}
+import { IGeoLocation, ICitiesItem , ICourceProps } from '@pages/home/interface';
 
 const Home: React.FC = () => {
-    // const [ userLocation, setUserLocation ] = useState<IGeoLocation>({ latitude : 0, longitude : 0 });
-    // const getGeoLocation = () => {
-    //     navigator.geolocation.getCurrentPosition((pos) => {
-    //         setUserLocation({
-    //             latitude: pos.coords.latitude,
-    //             longitude: pos.coords.longitude
-    //         });
-    //     });
-    // }
+    const [ userLocation, setUserLocation ] = useState<IGeoLocation>({ latitude : 0, longitude : 0 });
+    const getGeoLocation = () => {
+        navigator.geolocation.getCurrentPosition((pos) => {
+            setUserLocation({
+                latitude: pos.coords.latitude,
+                longitude: pos.coords.longitude
+            });
+        });
+    }
 
     const [ cities, setCities ] = useState<ICitiesItem[]>([]);
-    const [ course, setCourse ] = useState<ICourceProps[]>([]);
     const [ attraction, setAttraction ] = useState<any>([]);
-    // const [ mainItems, setMainItems ] = useState({});
+    const [ culture, setCulture ] = useState<any>([]);
+    const [ festival, setFestival ] = useState<any>([]);
+    const [ course, setCourse ] = useState<ICourceProps[]>([]);
+    const [ reports, setReports ] = useState<any>([]);
+    const [ lodge, setLodge ] = useState<any>([]);
 
     const fetchCities = async () => {
-        const data = await requestAPI({
-            service: serviceList.areaCode,
-            param: { numOfRows: 17 }
-        });
-        const { item } = data.data.response.body.items;
-        setCities(item);
+        const data = await fetchAPI(serviceList.areaCode, { numOfRows: 17 })
+        setCities(data);
     };
 
     const fetchAttraction = async () => {
-        const data = await requestAPI({
-            service: serviceList.areaBasedList,
-            param: { contentTypeId: 12 }
-        });
-        const { item } = data.data.response.body.items;
-        setAttraction(item);
+        const data = await fetchAPI(serviceList.areaBasedList, { contentTypeId: contentIdList['attraction'].code} )
+        setAttraction(data);
     };
-
+    const fetchCultrue = async () => {
+        const data = await fetchAPI(serviceList.areaBasedList, { contentTypeId: contentIdList['culture'].code} )
+        setCulture(data);
+    };
+    const fetchFestival = async () => {
+        const data = await fetchAPI(serviceList.areaBasedList, { contentTypeId: contentIdList['festival'].code} )
+        setFestival(data);
+    };
     const fetchCourse = async () => {
-        const data = await requestAPI({
-            service: serviceList.areaBasedList,
-            param: { contentTypeId: 25 }
-        });
-        const { item } = data.data.response.body.items;
-        setCourse(item);
+        const data = await fetchAPI(serviceList.areaBasedList, { contentTypeId: contentIdList['course'].code} )
+        setCourse(data);
     };
-
-    // const fetchMainContents = async () => {
-    //     const resAll = await requestAll([
-    //         { service: serviceList.areaBasedList, param: { contentTypeId: 12 } },
-    //         // { service: serviceList.areaBasedList, param: { contentTypeId: 14 } },
-    //         // { service: serviceList.areaBasedList, param: { contentTypeId: 15 } },
-    //         // { service: serviceList.areaBasedList, param: { contentTypeId: 25 } },
-    //         // { service: serviceList.areaBasedList, param: { contentTypeId: 28 } },
-    //         // { service: serviceList.areaBasedList, param: { contentTypeId: 32 } },
-    //         // { service: serviceList.areaBasedList, param: { contentTypeId: 38 } },
-    //         // { service: serviceList.areaBasedList, param: { contentTypeId: 39 } }
-    //     ]);
-
-    //     const resData = setDataNameAdd(resAll);
-    // }
-
-    // const setDataNameAdd = (data: any) => {
-    //     const mergeData:{[key: string]: any} = {};
-
-    //     data.forEach((items: any) => {
-    //         const id = items.config.params.contentTypeId.toString();
-    //         const contentCode = contentIdList[id].contentCode;
-
-    //         console.log('forEach / id ', id)
-    //         console.log('forEach / contentCode ', contentCode)
-    //         console.log('forEach / contentCode ', items)
-    //         // const { item } = items.data.response.body.items;
-    //         // console.log('forEach / item ', item)
-    //         // return mergeData[contentCode] = item;
-    //     });
-
-    //     setMainItems(mergeData);
-    // }
+    const fetchReports = async () => {
+        const data = await fetchAPI(serviceList.areaBasedList, { contentTypeId: contentIdList['reports'].code} )
+        setReports(data);
+    };
+    const fetchLodge = async () => {
+        const data = await fetchAPI(serviceList.areaBasedList, { contentTypeId: contentIdList['lodge'].code} )
+        setLodge(data);
+    };
 
     useEffect(() => {
+        getGeoLocation();
         fetchCities();
         fetchAttraction();
+        fetchCultrue();
+        fetchFestival();
         fetchCourse();
-        // fetchMainContents();
-        // getGeoLocation();
+        fetchReports();
+        fetchLodge();
     },[]);
 
     return (
         <>
+            <Search />
+
             { cities && cities.length > 0 && <CitiesList title={'관심지역 둘러보기'} data={cities} /> }
-
-            <ItemList title={'최근 즐거운 관광지'} data={attraction} />
-
-            <ItemList title={'방구석 랜선 여행코스'} data={course} />
+            { attraction && attraction.length > 0 &&  <ItemList title={'최근에 등록된 관광지'} data={attraction} type={'swipe'} /> }
+            { culture && culture.length > 0 && <ItemList title={'알아가요 우리문화'} data={culture} type={'list'} /> }
+            { festival && festival.length > 0 && <ItemList title={'화면으로 행사 구경하기'} data={festival} type={'swipe'} /> }
+            { course && course.length > 0 && <ItemList title={'방구석 랜선 여행코스'} data={course} type={'swipe'} /> }
+            { reports && reports.length > 0 && <ItemList title={'즐겨봐요 레포츠'} data={reports} type={'list'} /> }
+            { lodge && lodge.length > 0 && <ItemList title={'꿀잠행복 숙박정보'} data={lodge} type={'list'} /> }
         </>
     );
 }

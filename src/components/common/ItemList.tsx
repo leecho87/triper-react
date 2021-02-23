@@ -3,10 +3,12 @@ import { Link } from 'react-router-dom';
 import styled from "styled-components";
 
 import { ArticleTitle } from '@components/common';
+import classNames from "classnames";
 
 interface IItemListProps {
     title?: string;
     data?: any;
+    type?: string;
 }
 
 interface IItemListStyleProps {
@@ -34,7 +36,7 @@ const ItemListWrapper = styled.article<IItemListStyleProps>`
     //     opacity:.8;
     // }
 
-    .listBox {
+    .listArea {
         display:flex;
         flex-wrap:no-wrap;
         overflow-x: auto;
@@ -49,7 +51,6 @@ const ItemListWrapper = styled.article<IItemListStyleProps>`
             content: "";
             padding-left: 15px;
         }
-
         .item {
             background-color:#fff;
 
@@ -57,41 +58,70 @@ const ItemListWrapper = styled.article<IItemListStyleProps>`
                 margin-left:12px;
             }
 
-            img {
-                width:180px;
-                height:120px;
-                border-radius:8px;
-            }
-            .dummy {
-                display:flex;
-                justify-content:center;
-                align-items:center;
-                width:180px;
-                height:120px;
-                border-radius:8px;
-                line-height:1.8;
-                text-align:center;
-                color:#fff;
-                background-color:#bbb;
-            }
-            .title {
-                overflow:hidden;
-                display: -webkit-box;
-                -webkit-line-clamp: 2;
-                -webkit-box-orient: vertical;
-                height:50px;
-                padding:6px 0 4px;
-                font-size:14px;
-                line-height:1.5;
-            }
-            .read {
-                padding:4px 0 0;
-                font-size:12px;
-                color:#999;
+            .thumb {
                 img {
-                    width:16px;
-                    height:16px;
-                    margin-right:2px;
+                    min-width:180px;
+                    height:120px;
+                    border-radius:8px;
+                }
+                .dummy {
+                    display:flex;
+                    justify-content:center;
+                    align-items:center;
+                    min-width:180px;
+                    height:120px;
+                    border-radius:8px;
+                    line-height:1.8;
+                    text-align:center;
+                    color:#fff;
+                    background-color:#bbb;
+                }
+            }
+            .text {
+                padding:6px 0 4px;
+                .title {
+                    overflow:hidden;
+                    display: -webkit-box;
+                    -webkit-line-clamp: 2;
+                    -webkit-box-orient: vertical;
+                    height:42px;
+                    font-size:14px;
+                    line-height:1.5;
+                }
+                .read {
+                    padding:4px 0 0;
+                    font-size:12px;
+                    color:#999;
+                    img {
+                        width:16px;
+                        height:16px;
+                        margin-right:2px;
+                    }
+                }
+            }
+        }
+
+        &.list {
+            display:block;
+            padding:20px 15px;
+
+            .item {
+                display:flex;
+                align-items:center;
+                margin:12px 0 0;
+                .thumb {
+                    margin-right:10px;
+                    width:100px;
+                    img, .dummy {
+                        min-width:unset;
+                        width:100%;
+                        height:80px;
+                    }
+                }
+                .text {
+                    .title {
+                        height:auto;
+                    }
                 }
             }
         }
@@ -117,26 +147,25 @@ const ItemListWrapper = styled.article<IItemListStyleProps>`
     }
 `
 
-const ItemList: React.FC<IItemListProps> = ({ title, data }) => {
+const ItemList: React.FC<IItemListProps> = ({ title, data, type = 'swipe' }) => {
     return (
         <ItemListWrapper bgCode={data[0]?.contenttypeid}>
             <ArticleTitle>{title}</ArticleTitle>
-            <div className="listArea">
-                <div className="listBox">
-                { data && data.length > 0 && data.map((item:any, index:number) => (
-                    <div key={index} className="item">
+            <div className={classNames(["listArea", type])}>
+            { data && data.length > 0 && data.map((item:any, index:number) => (
+                <div key={index} className="item">
+                    <div className="thumb">
                         { item.firstimage ? (
-                            <img src={item.firstimage} />
+                            <img src={item.firstimage} alt={item.title} />
                         ) : (
                             <span className="dummy"><strong>image<br />not found</strong></span>
                         )}
-                        <p className="title">{item.title}</p>
-                        <p className="read">
-                        <img src="/images/common/read.png" alt=""/> {item.readcount}
-                        </p>
                     </div>
-                ))}
+                    <div className="text">
+                        <p className="title">{item.title}</p>
+                    </div>
                 </div>
+            ))}
             </div>
             <Link to="/" className="more">자세히</Link>
         </ItemListWrapper>
