@@ -30,7 +30,7 @@ const combineParams:any = (param:any) => {
 
 const clientAPI = axios.create({
     baseURL: process.env.REACT_APP_TOUR,
-    timeout: 3000
+    timeout: 3000,
 });
 
 const requestAPI = async ({service, param}: IAPIParams) => {
@@ -38,7 +38,8 @@ const requestAPI = async ({service, param}: IAPIParams) => {
     try {
         if ( method === 'get') {
             return await clientAPI.get(`/${serviceCode}`, {
-                params : combineParams(param)
+                params : combineParams(param),
+                withCredentials: true
             });
         } else {
             // POST

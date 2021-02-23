@@ -18,7 +18,7 @@ interface IItemListStyleProps {
 
 const ItemListWrapper = styled.article<IItemListStyleProps>`
     position:relative;
-    margin-top:40px;
+    margin-top:30px;
     border-top:10px solid #f7f7f7;
     padding:25px 0 0;
     &.first {
@@ -89,6 +89,10 @@ const ItemListWrapper = styled.article<IItemListStyleProps>`
                     font-size:14px;
                     line-height:1.5;
                 }
+                .address {
+                    font-size:12px;
+                    color:#999;
+                }
                 .read {
                     padding:4px 0 0;
                     font-size:12px;
@@ -156,14 +160,14 @@ const ItemList: React.FC<IItemListProps> = ({ title, data, first=false, type = '
             { data && data.length > 0 && data.map((item:any, index:number) => (
                 <div key={index} className="item">
                     <div className="thumb">
-                        { item.firstimage ? (
-                            <img src={item.firstimage} alt={item.title} />
-                        ) : (
-                            <span className="dummy"><strong>image<br />not found</strong></span>
-                        )}
+                        { item.firstimage
+                            ? ( <img src={item.firstimage} alt={item.title} /> ) 
+                            : ( <span className="dummy"><strong>image<br />not found</strong></span> )
+                        }
                     </div>
                     <div className="text">
                         <p className="title">{item.title}</p>
+                        { item.addr1 && <p className="address">{item.addr1}</p>}
                     </div>
                 </div>
             ))}
