@@ -1,9 +1,13 @@
 import Home from '@pages/home';
 import Member from '@pages/member';
 import Search from '@pages/search';
+import Location from '@pages/location';
 
-export default {
+const Pages = {
     Home,
     Member,
-    Search
+    Search,
+    Location
 }
+
+export default Pages;

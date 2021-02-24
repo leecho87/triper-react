@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
 import serviceList, { contentIdList } from '@service/ServiceList';
 
 import fetchAPI from '@pages/home/service';
@@ -7,7 +6,7 @@ import fetchAPI from '@pages/home/service';
 import { ItemList } from '@components/common'
 import { Top, CitiesList } from '@components/home'
 
-import { IGeoLocation, ICitiesItem , ICourceProps } from '@pages/home/interface';
+import { IGeoLocation, ICitiesItem , ICultureProps, ICourceProps, IFestivalProps } from '@pages/home/interface';
 
 const Home: React.FC = () => {
     const [ userLocation, setUserLocation ] = useState<IGeoLocation>({ latitude : 0, longitude : 0 });
@@ -22,8 +21,8 @@ const Home: React.FC = () => {
 
     const [ cities, setCities ] = useState<ICitiesItem[]>([]);
     const [ attraction, setAttraction ] = useState<any>([]);
-    const [ culture, setCulture ] = useState<any>([]);
-    const [ festival, setFestival ] = useState<any>([]);
+    const [ culture, setCulture ] = useState<ICultureProps[]>([]);
+    const [ festival, setFestival ] = useState<IFestivalProps[]>([]);
     const [ course, setCourse ] = useState<ICourceProps[]>([]);
     const [ reports, setReports ] = useState<any>([]);
     const [ lodge, setLodge ] = useState<any>([]);
@@ -68,6 +67,7 @@ const Home: React.FC = () => {
         fetchLodge();
     },[]);
 
+    console.log('[userLocation]', userLocation)
     return (
         <>
             <Top />

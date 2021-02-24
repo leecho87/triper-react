@@ -13,7 +13,7 @@ const SearchBarWrapper = styled.div`
 const SearchBar:React.FC = () => {
     return (
         <SearchBarWrapper>
-            검색!
+            searchBar
         </SearchBarWrapper>
     )
 }

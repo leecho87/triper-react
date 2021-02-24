@@ -41,7 +41,7 @@ const TopWrapper = styled.article`
         background-color:#fff;
         background-image:url('/images/common/search.png');
         background-repeat:no-repeat;
-        background-position:95% center;
+        background-position:calc(100% - 20px) center;
         background-size:18px 18px;
     }
 `

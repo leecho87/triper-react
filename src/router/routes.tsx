@@ -20,14 +20,14 @@ const ROUTES = [
         path: "/location",
         exact: true,
         title: "주변",
-        component: pages.Search
+        component: pages.Location
     },
     {
         key: "MEMBER",
         path: "/member",
         exact: true,
         title: "내정보",
-        component: pages.Search
+        component: pages.Member
     },
 ];
 

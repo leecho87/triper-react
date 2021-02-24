@@ -38,8 +38,7 @@ const requestAPI = async ({service, param}: IAPIParams) => {
     try {
         if ( method === 'get') {
             return await clientAPI.get(`/${serviceCode}`, {
-                params : combineParams(param),
-                withCredentials: true
+                params : combineParams(param)
             });
         } else {
             // POST

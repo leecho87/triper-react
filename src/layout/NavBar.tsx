@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import ROUTES from '@router/routes';
 
@@ -16,6 +16,7 @@ const NavBarWrapper = styled.nav`
     padding:12px 0 0;
     text-align:center;
     border-top:1px solid #eee;
+    color:#999;
     &:not(:first-of-type) {
       &:after {
         content:'';
@@ -30,10 +31,18 @@ const NavBarWrapper = styled.nav`
     }
     img {
       width:20px;
+      opacity:.5;
     }
     p {
       margin-top:6px;
       line-height:1;
+    }
+
+    &.selected {
+      color:#333;
+      img {
+        opacity:1;
+      }
     }
   }
 `;
@@ -42,10 +51,10 @@ const NavBar = () => {
   return (
     <NavBarWrapper>
       { ROUTES && ROUTES.map((item, index) => (
-        <Link to={item.path} key={index} className="item">
+        <NavLink to={item.path} exact key={index} className="item" activeClassName="selected">
           <img src={`/images/common/nav/${item.key.toLocaleLowerCase()}.png`} alt={item.title} />
           <p>{item.title}</p>
-        </Link>
+        </NavLink>
       ))}
     </NavBarWrapper>
   );

@@ -1,5 +1,3 @@
-import styled from 'styled-components';
-
 const colors = {
     mainTxtColor: '#333',
     subTxtColor: '#999',
