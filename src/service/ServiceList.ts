@@ -84,7 +84,7 @@ const contentIdList: {[key:string]: any} = {
     },
     'shopping': {
         name: '쇼핑',
-        code: '38'
+        code: 38
     },
     'restaurant': {
         name: '음식점',

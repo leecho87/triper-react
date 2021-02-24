@@ -1,15 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { SearchBar } from '@components/common'
+import { join } from 'path';
 
 const SearchWrapper = styled.article`
-    position:relative;   
+    position:relative;
 `
 
 const Search:React.FC = () => {
+    // const [ searchValue, setSearchValue ] = useState({});
+    const handleSubmit = (category: string, keyword: string) => {
+        console.log('[handleSubmit] / category ', category);
+        console.log('[handleSubmit] / keyword ', keyword);
+    }
+
     return (
         <SearchWrapper>
-            <SearchBar />
+            <SearchBar onSubmit={handleSubmit}/>
         </SearchWrapper>
     )
 }
