@@ -1,7 +1,6 @@
 import requestAPI from '@service/Service';
 
 const fetchAPI = async (service:any, params:any) => {
-
     const data = await requestAPI({
         service: service,
         param: params

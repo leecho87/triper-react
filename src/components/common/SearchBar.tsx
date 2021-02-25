@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 
 import { contentIdList } from '@service/ServiceList';
@@ -30,6 +30,7 @@ const SearchBar:React.FC<any> = ({ onSubmit }) => {
     const contentKeyArr:any = Object.keys(contentIdList);
     const [ searchCategory, setSearchCategory ] = useState<string>(contentKeyArr[0]);
     const [ searchKeyword, setSearchKeyword ] = useState('');
+    const searchInput:any = useRef(null);
 
     const handleChange = (event: any) => {
         setSearchCategory(event.target.value);
@@ -42,6 +43,13 @@ const SearchBar:React.FC<any> = ({ onSubmit }) => {
     const handleSubmit = (event: any) => {
         event.preventDefault();
         onSubmit(searchCategory, searchKeyword);
+        clearSubmit();
+    }
+
+    const clearSubmit = () => {
+        setSearchKeyword('');
+        searchInput.current.value = '';
+        searchInput.current.focus();
     }
 
     return (
@@ -57,7 +65,7 @@ const SearchBar:React.FC<any> = ({ onSubmit }) => {
                     )
                 })}
                 </select>
-                <input type="text" onKeyUp={(e) => handleKeyword(e)}/>
+                <input type="text" ref={searchInput} autoFocus onKeyUp={(e) => handleKeyword(e)}/>
             </form>
         </SearchBarWrapper>
     )
