@@ -4,8 +4,16 @@ import styled from 'styled-components';
 import { contentIdList } from '@service/ServiceList';
 
 const SearchBarWrapper = styled.div`
-    position:relative;
+    z-index:50;
+    position:fixed;
+    left:0;
+    top:0;
+    right:0;
+    width:100%;
     padding:20px;
+    border-bottom:1px solid #ccc;
+    background-color:#fff;
+
     form {
         display:flex;
     }

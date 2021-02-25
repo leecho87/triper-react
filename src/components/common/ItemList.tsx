@@ -10,6 +10,7 @@ interface IItemListProps {
     data?: any;
     first?: boolean;
     type?: string;
+    search?: boolean;
 }
 
 interface IItemListStyleProps {
@@ -23,6 +24,11 @@ const ItemListWrapper = styled.article<IItemListStyleProps>`
     padding:25px 0 0;
     &.first {
         margin-top:25px;
+    }
+    &.search {
+        border-top:0 none;
+        padding:0;
+        margin:0;
     }
     // &:before {
     //     content:'';
@@ -134,8 +140,8 @@ const ItemListWrapper = styled.article<IItemListStyleProps>`
 
     .more {
         position:absolute;
+        top:19px;
         right:15px;
-        top:46px;
         font-size:13px;
         color:#888;
         &:after {
@@ -150,29 +156,53 @@ const ItemListWrapper = styled.article<IItemListStyleProps>`
             vertical-align:top;
         }
     }
+
+    .none {
+        display:flex;
+        width:100%;
+        height:calc(100vh - 138px);
+        flex-direction:column;
+        justify-content:center;
+        p {
+            text-align:center;
+            font-size:18px;
+            line-height:1.8;
+            letter-spacing:-1.5px;
+        }
+    }
 `
 
-const ItemList: React.FC<IItemListProps> = ({ title, data, first=false, type = 'swipe' }) => {
+const ItemList: React.FC<IItemListProps> = ({ title, data, first=false, type = 'swipe', search=false }) => {
     return (
-        <ItemListWrapper bgCode={data[0]?.contenttypeid} className={first ? "first" : undefined}>
-            <ArticleTitle>{title}</ArticleTitle>
-            <div className={classNames(["listArea", type])}>
-            { data && data.length > 0 && data.map((item:any, index:number) => (
-                <div key={index} className="item">
-                    <div className="thumb">
-                        { item.firstimage
-                            ? ( <img src={item.firstimage} alt={item.title} /> ) 
-                            : ( <span className="dummy"><strong>image<br />not found</strong></span> )
-                        }
-                    </div>
-                    <div className="text">
-                        <p className="title">{item.title}</p>
-                        { item.addr1 && <p className="address">{item.addr1}</p>}
-                    </div>
+        <ItemListWrapper bgCode={data[0]?.contenttypeid} className={classNames([first && 'first', search && 'search'])}>
+            { data && data.length > 0 ? (
+                <>
+                <ArticleTitle>
+                    {title}
+                    <Link to="/" className="more">자세히</Link>
+                </ArticleTitle>
+                <div className={classNames(["listArea", type])}>
+                    {data.map((item:any, index:number) => (
+                        <div key={index} className="item">
+                            <div className="thumb">
+                                { item.firstimage
+                                    ? ( <img src={item.firstimage} alt={item.title} /> ) 
+                                    : ( <span className="dummy"><strong>image<br />not found</strong></span> )
+                                }
+                            </div>
+                            <div className="text">
+                                <p className="title">{item.title}</p>
+                                { item.addr1 && <p className="address">{item.addr1}</p>}
+                            </div>
+                        </div>
+                    ))}
                 </div>
-            ))}
-            </div>
-            <Link to="/" className="more">자세히</Link>
+                </>
+            ) : (
+                <div className="none">
+                    <p>검색어가 없거나 올바르지 않습니다<br />검색어를 입력해주세요</p>
+                </div>
+            )}
         </ItemListWrapper>
     );
 };
