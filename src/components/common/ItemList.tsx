@@ -11,13 +11,10 @@ interface IItemListProps {
     first?: boolean;
     type?: string;
     search?: boolean;
+    searchingState?: boolean;
 }
 
-interface IItemListStyleProps {
-    bgCode: number
-}
-
-const ItemListWrapper = styled.article<IItemListStyleProps>`
+const ItemListWrapper = styled.article`
     position:relative;
     margin-top:30px;
     border-top:10px solid #f7f7f7;
@@ -30,18 +27,6 @@ const ItemListWrapper = styled.article<IItemListStyleProps>`
         padding:0;
         margin:0;
     }
-    // &:before {
-    //     content:'';
-    //     z-index:-1;
-    //     position:absolute;
-    //     top:0;
-    //     right:0;
-    //     bottom:0;
-    //     left:0;
-    //     background-image:${props => `url(/images/home/bg_${props.bgCode}.png)`};
-    //     background-size:cover;
-    //     opacity:.8;
-    // }
 
     .listArea {
         display:flex;
@@ -172,9 +157,11 @@ const ItemListWrapper = styled.article<IItemListStyleProps>`
     }
 `
 
-const ItemList: React.FC<IItemListProps> = ({ title, data, first=false, type = 'swipe', search=false }) => {
+const ItemList: React.FC<IItemListProps> = ({
+    title, data, first=false, type = 'swipe', search=false, searchingState=false
+}) => {
     return (
-        <ItemListWrapper bgCode={data[0]?.contenttypeid} className={classNames([first && 'first', search && 'search'])}>
+        <ItemListWrapper className={classNames([first && 'first', search && 'search'])}>
             { data && data.length > 0 ? (
                 <>
                 <ArticleTitle>
@@ -186,7 +173,7 @@ const ItemList: React.FC<IItemListProps> = ({ title, data, first=false, type = '
                         <div key={index} className="item">
                             <div className="thumb">
                                 { item.firstimage
-                                    ? ( <img src={item.firstimage} alt={item.title} /> ) 
+                                    ? ( <img src={item.firstimage} alt={item.title} /> )
                                     : ( <span className="dummy"><strong>image<br />not found</strong></span> )
                                 }
                             </div>
@@ -200,7 +187,12 @@ const ItemList: React.FC<IItemListProps> = ({ title, data, first=false, type = '
                 </>
             ) : (
                 <div className="none">
-                    <p>검색어가 없거나 올바르지 않습니다<br />검색어를 입력해주세요</p>
+                    { searchingState ? (
+                        <p>검색어를 입력해주세요</p>
+                    ): (
+                        <p>검색어가 없거나 올바르지 않습니다</p>
+                    )}
+
                 </div>
             )}
         </ItemListWrapper>

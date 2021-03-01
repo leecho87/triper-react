@@ -14,12 +14,13 @@ const SearchBarWrapper = styled.div`
     border-bottom:1px solid #ccc;
     background-color:#fff;
 
-    form {
+    .searchRow {
         display:flex;
     }
     select {
         box-sizing:border-box;
-        flex:0 0 120px;
+        flex:1;
+        max-width:100px;
         height:36px;
         padding:0 10px;
         margin-right:10px;
@@ -34,28 +35,18 @@ const SearchBarWrapper = styled.div`
     }
 `
 
-const SearchBar:React.FC<any> = ({ onSubmit }) => {
-    const contentKeyArr:any = Object.keys(contentIdList);
-    const [ searchCategory, setSearchCategory ] = useState<string>(contentKeyArr[0]);
-    const [ searchKeyword, setSearchKeyword ] = useState('');
+const SearchBar:React.FC<any> = ({
+    keyword, category, onSubmit, onChangeKeyword, onChangeCategory
+}) => {
     const searchInput:any = useRef(null);
-
-    const handleChange = (event: any) => {
-        setSearchCategory(event.target.value);
-    };
-
-    const handleKeyword = (event: any) => {
-        setSearchKeyword(event.target.value);
-    }
 
     const handleSubmit = (event: any) => {
         event.preventDefault();
-        onSubmit(searchCategory, searchKeyword);
+        onSubmit();
         clearSubmit();
     }
 
     const clearSubmit = () => {
-        setSearchKeyword('');
         searchInput.current.value = '';
         searchInput.current.focus();
     }
@@ -63,17 +54,23 @@ const SearchBar:React.FC<any> = ({ onSubmit }) => {
     return (
         <SearchBarWrapper>
             <form onSubmit={(e) => handleSubmit(e)}>
-                <select
-                    onChange={(e) => handleChange(e)}
-                    value={searchCategory}
-                >
-                { contentIdList && Object.keys(contentIdList).map((item:any) => {
-                    return (
+                <div className="searchRow">
+                    <select
+                        onChange={(e) => onChangeCategory(e)}
+                        value={category}
+                    >
+                    { contentIdList && Object.keys(contentIdList).map((item:any) => (
                         <option key={contentIdList[item].code} value={item}>{contentIdList[item].name}</option>
-                    )
-                })}
-                </select>
-                <input type="text" ref={searchInput} autoFocus onKeyUp={(e) => handleKeyword(e)}/>
+                    ))}
+                    </select>
+                    <input
+                        autoFocus
+                        type="text"
+                        ref={searchInput}
+                        value={keyword}
+                        onChange={ (e) => onChangeKeyword(e) }
+                    />
+                </div>
             </form>
         </SearchBarWrapper>
     )

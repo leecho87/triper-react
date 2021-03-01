@@ -24,8 +24,3 @@ $ npm run start     // 프로젝트 시작 (localhost:3000)
 - `국문 관광정보 서비스` (한국관광공사)
 - `한국관광공사 관광사진 정보` (한국관광공사)
 - `동네예보 조회서비스` (기상청)
-
-
-#### 담당
-- `leecho87` - (https://github.com/leecho87) - 프론트
-- `yops` - https://github.com/leaveittogod0123 - 백엔드
