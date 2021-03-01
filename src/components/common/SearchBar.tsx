@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useRef } from 'react';
 import styled from 'styled-components';
 
 import { contentIdList } from '@service/ServiceList';
@@ -41,14 +41,9 @@ const SearchBar:React.FC<any> = ({
     const searchInput:any = useRef(null);
 
     const handleSubmit = (event: any) => {
+        console.log('SearchBar [handleSubmit]');
         event.preventDefault();
         onSubmit();
-        clearSubmit();
-    }
-
-    const clearSubmit = () => {
-        searchInput.current.value = '';
-        searchInput.current.focus();
     }
 
     return (

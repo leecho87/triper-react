@@ -7,7 +7,7 @@ import requestAPI from '@service/Service';
 import serviceList, { contentIdList } from '@service/ServiceList';
 
 import qs from 'qs';
-import { isJsxClosingElement } from 'typescript';
+import { createJSDocCallbackTag, isJsxClosingElement } from 'typescript';
 
 const SearchWrapper = styled.article`
     position:relative;
@@ -16,37 +16,36 @@ const SearchWrapper = styled.article`
 
 const Search:React.FC = () => {
     const history = useHistory();
-    const [ currentCategory, setCurrentCategory ] = useState<any>('attraction');
-    const [ currentKeyword, setCurrentKeyword ] = useState<any>('');
+    const [ category, setCategory ] = useState<any>('attraction');
+    const [ keyword, setKeyword ] = useState<any>('');
     const [ currentData, setCurrentData ] = useState<any>({});
     const [ searchingState, setSearchingState ] = useState<boolean>(false);
 
     const handleSubmit = () => {
-        const qsParam = decodeURIComponent(qs.stringify({category: currentCategory, keyword: currentKeyword}));
+        const qsParam = decodeURIComponent(qs.stringify({category: category, keyword: keyword}));
         history.push({ pathname: '/search', search: `?${qsParam}`});
         fetchSearch();
     };
 
     const handleSelect = (event: any) => {
-        const category = event.target.value;
-        setCurrentCategory(category);
+        const value = event.target.value;
+        setCategory(value);
     }
 
     const handleKeyword = (event: any) => {
-        const keyword = event.target.value;
-        setCurrentKeyword(keyword);
+        const value = event.target.value;
+        setKeyword(value);
     }
 
     const fetchSearch = async () => {
-        console.log('[fetchSearch] - ', currentCategory);
-        console.log('[fetchSearch] - ', currentKeyword);
+        const { category, keyword } = getQueryParams();
 
-        if ( currentCategory && currentKeyword && currentKeyword.length > 0 ) {
+        if ( category && keyword ) {
             const data = await requestAPI({
                 service: serviceList.searchKeyword,
                 param: {
-                    contentTypeId: contentIdList[currentCategory].code,
-                    keyword: currentKeyword,
+                    contentTypeId: contentIdList[category].code,
+                    keyword: keyword,
                     numOfRows: 20
                 }
             });
@@ -55,20 +54,20 @@ const Search:React.FC = () => {
         }
     };
 
-    const setQueryParams = async () => {
+    const getQueryParams = () => {
         const params: qs.ParsedQs = qs.parse(window.location.search, { ignoreQueryPrefix: true });
-        const category: any = params.category === undefined ? 'attraction' : params.category;
-        const keyword: any = params.keyword === undefined ? '' : params.keyword;
+        const paramCategory: any = params.category === undefined ? 'attraction' : params.category;
+        const paramKeyword: any = params.keyword === undefined ? '' : params.keyword;
+        setCategory(paramCategory);
+        setKeyword(paramKeyword);
 
-        console.log('[setQueryParams] - ', category);
-        console.log('[setQueryParams] - ', keyword);
-
-        setCurrentCategory(decodeURIComponent(category));
-        setCurrentKeyword(decodeURIComponent(keyword));
+        return {
+            category: decodeURIComponent(paramCategory),
+            keyword: decodeURIComponent(paramKeyword),
+        }
     }
 
     const initialize = async () => {
-        await setQueryParams();
         await fetchSearch();
     };
 
@@ -79,14 +78,14 @@ const Search:React.FC = () => {
     return (
         <SearchWrapper>
             <SearchBar
-                keyword={currentKeyword}
-                category={currentCategory}
+                keyword={keyword}
+                category={category}
                 onSubmit={handleSubmit}
                 onChangeKeyword={handleKeyword}
                 onChangeCategory={handleSelect}
             />
             <ItemList
-                title={contentIdList[currentCategory].name}
+                title={contentIdList[category].name}
                 data={currentData}
                 type="list"
                 search
