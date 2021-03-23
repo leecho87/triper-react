@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import serviceList, { contentIdList } from '@service/ServiceList';
 
 import fetchAPI from '@pages/home/service';
@@ -9,15 +9,16 @@ import { Top, CitiesList } from '@components/home'
 import { IGeoLocation, ICitiesItem , ICultureProps, ICourceProps, IFestivalProps } from '@pages/home/interface';
 
 const Home: React.FC = () => {
-    const [ userLocation, setUserLocation ] = useState<IGeoLocation>({ latitude : 0, longitude : 0 });
-    const getGeoLocation = () => {
-        navigator.geolocation.getCurrentPosition((pos) => {
-            setUserLocation({
-                latitude: pos.coords.latitude,
-                longitude: pos.coords.longitude
-            });
-        });
-    }
+    // const [ userLocation, setUserLocation ] = useRecoilState<IGeoLocation>({ latitude : 0, longitude : 0 });
+    // const [ userLocation, setUserLocation ] = useState<IGeoLocation>({ latitude : 0, longitude : 0 });
+    // const getGeoLocation = useCallback(() => {
+    //     navigator.geolocation.getCurrentPosition((pos) => {
+    //         setUserLocation({
+    //             latitude: pos.coords.latitude,
+    //             longitude: pos.coords.longitude
+    //         });
+    //     });
+    // }, [])
 
     const [ cities, setCities ] = useState<ICitiesItem[]>([]);
     const [ attraction, setAttraction ] = useState<any>([]);
@@ -27,10 +28,10 @@ const Home: React.FC = () => {
     const [ reports, setReports ] = useState<any>([]);
     const [ lodge, setLodge ] = useState<any>([]);
 
-    const fetchCities = async () => {
-        const data = await fetchAPI(serviceList.areaCode, { numOfRows: 17 })
-        setCities(data);
-    };
+    // const fetchCities = async () => {
+    //     const data = await ßfetchAPI(serviceList.areaCode, { numOfRows: 17 })
+    //     setCities(data);
+    // };
     const fetchAttraction = async () => {
         const data = await fetchAPI(serviceList.areaBasedList, { contentTypeId: contentIdList['attraction'].code} )
         setAttraction(data);
@@ -57,8 +58,8 @@ const Home: React.FC = () => {
     };
 
     useEffect(() => {
-        getGeoLocation();
-        fetchCities();
+        // getGeoLocation();
+        // fetchCities();
         fetchAttraction();
         fetchCultrue();
         fetchFestival();
@@ -67,7 +68,6 @@ const Home: React.FC = () => {
         fetchLodge();
     },[]);
 
-    console.log('[userLocation]', userLocation)
     return (
         <>
             <Top />
