@@ -6,7 +6,7 @@ import ROUTES from '@router/routes';
 const NavBarWrapper = styled.nav`
   position: relative;
   display: flex;
-  height: 60px;
+  flex:0 0 60px;
   justify-content: space-between;
 
   .item {
