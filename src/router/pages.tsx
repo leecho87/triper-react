@@ -1,13 +1,17 @@
 import Home from '@pages/home';
-import Member from '@pages/member';
 import Search from '@pages/search';
 import Location from '@pages/location';
+import Member from '@pages/member';
+import SignIn from '@pages/member/SignIn';
+import SignUp from '@pages/member/SignUp';
 
 const Pages = {
     Home,
     Member,
     Search,
-    Location
+    Location,
+    SignIn,
+    SignUp
 }
 
 export default Pages;

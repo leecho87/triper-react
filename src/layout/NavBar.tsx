@@ -50,12 +50,22 @@ const NavBarWrapper = styled.nav`
 const NavBar = () => {
   return (
     <NavBarWrapper>
-      { ROUTES && ROUTES.map((item, index) => (
-        <NavLink to={item.path} exact key={index} className="item" activeClassName="selected">
-          <img src={`/images/common/nav/${item.key.toLocaleLowerCase()}.png`} alt={item.title} />
-          <p>{item.title}</p>
-        </NavLink>
-      ))}
+      <NavLink to="/" exact className="item" activeClassName="selected">
+        <img src={`/images/common/nav/home.png`} alt="홈" />
+        <p>홈</p>
+      </NavLink>
+      <NavLink to="/search" exact className="item" activeClassName="selected">
+        <img src={`/images/common/nav/search.png`} alt="검색" />
+        <p>검색</p>
+      </NavLink>
+      <NavLink to="/location" exact className="item" activeClassName="selected">
+        <img src={`/images/common/nav/location.png`} alt="주변" />
+        <p>주변</p>
+      </NavLink>
+      <NavLink to="member" exact className="item" activeClassName="selected">
+        <img src={`/images/common/nav/member.png`} alt="내정보" />
+        <p>내정보</p>
+      </NavLink>
     </NavBarWrapper>
   );
 };

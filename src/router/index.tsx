@@ -1,7 +1,7 @@
 import { Switch, Route } from 'react-router-dom';
 import ROUTES from './routes';
 
-const Router = () => {
+const Router = ({ isLoggedIn }:any) => {
     return (
         <Switch>
             { ROUTES.map((item:any, index) => {
@@ -10,7 +10,7 @@ const Router = () => {
                     key={index}
                     path={path}
                     exact={exact}
-                    render={ props => <Component {...props} /> }
+                    render={ props => <Component isLoggedIn={isLoggedIn} {...props} /> }
                 />
             })}
         </Switch>

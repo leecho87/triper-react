@@ -1,16 +1,17 @@
-import React from 'react'
-import "./App.scss";
+import React, { useState } from 'react'
 import Router from '@router/index'
 import Container from '@layout/Container';
+import firebase from './myFirebase';
 
-import firebase from './Firebase';
+import "./App.scss";
+
 
 const App = () => {
-
-    console.log('firebase', firebase)
+    const [ isLoggedIn, setIsLoggedIn ] = useState(false);
+    
     return (
         <Container>
-            <Router />
+            <Router isLoggedIn={isLoggedIn} />
         </Container>
     )
 }

@@ -29,6 +29,20 @@ const ROUTES = [
         title: "내정보",
         component: pages.Member
     },
+    {
+        key: "SIGNIN",
+        path: "/signin",
+        exact: true,
+        title: "로그인",
+        component: pages.SignIn
+    },
+    {
+        key: "SIGNUP",
+        path: "/signup",
+        exact: true,
+        title: "회원가입",
+        component: pages.SignUp
+    },
 ];
 
 export default ROUTES;

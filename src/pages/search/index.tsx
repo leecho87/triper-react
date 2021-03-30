@@ -7,7 +7,6 @@ import requestAPI from '@service/Service';
 import serviceList, { contentIdList } from '@service/ServiceList';
 
 import qs from 'qs';
-import { createJSDocCallbackTag, isJsxClosingElement } from 'typescript';
 
 const SearchWrapper = styled.article`
     position:relative;
