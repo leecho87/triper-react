@@ -1,7 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
-import ROUTES from '@router/routes';
 
 const NavBarWrapper = styled.nav`
   position: relative;

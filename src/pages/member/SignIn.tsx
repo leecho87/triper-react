@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
 const MemberWrapper = styled.section`
@@ -81,7 +81,8 @@ const SignIn: React.FC = () => {
     const history = useHistory();
     const [ login, setLogin ] = useState({
         userId:'', userPassword: ''
-    })
+    });
+    const [ findPw, setFindPw ] = useState(false)
     const onClickBack = () => {
         if (history.length > 2) {
             history.goBack();
@@ -110,17 +111,35 @@ const SignIn: React.FC = () => {
     return (
         <MemberWrapper>
             <button type="button" className="backBtn" onClick={onClickBack}><span>뒤로가기</span></button>
-            <h1>이메일로 로그인</h1>
-            <form onSubmit={onSubmit}>
-                <label htmlFor="userId">이메일</label>
-                <input type="text" id="userId" name="userId" placeholder="triper@triper.com" value={login.userId} onChange={onChange} />
-                <label htmlFor="userPassword">비밀번호</label>
-                <input type="password" id="userPassword" name="userPassword" placeholder="영어,숫자,특수문자" value={login.userPassword} onChange={onChange} />
-                <button type="submit">로그인</button>
-            </form>
-            <div className="findPw">
-                <Link to="">비밀번호를 잃어버렸어요</Link>
-            </div>
+            { findPw ? (
+                <>
+                    <h1>이메일로 로그인</h1>
+                    <form onSubmit={onSubmit}>
+                        <label htmlFor="userId">이메일</label>
+                        <input type="text" id="userId" name="userId" placeholder="triper@triper.com" value={login.userId} onChange={onChange} />
+                        <label htmlFor="userPassword">비밀번호</label>
+                        <input type="password" id="userPassword" name="userPassword" placeholder="영어,숫자,특수문자" value={login.userPassword} onChange={onChange} />
+                        <button type="submit">로그인</button>
+                    </form>
+                    <div className="findPw">
+                        <button type="button" onClick={() => setFindPw(!findPw)}>비밀번호를 잃어버렸어요</button>
+                    </div>
+                </>
+            ) : (
+                <>
+                    <h1>비밀번호 찾기</h1>
+                    <form onSubmit={onSubmit}>
+                        <label htmlFor="userId">이메일</label>
+                        <input type="text" id="userId" name="userId" placeholder="triper@triper.com" value={login.userId} onChange={onChange} />
+                        <label htmlFor="userPassword">비밀번호</label>
+                        <input type="password" id="userPassword" name="userPassword" placeholder="영어,숫자,특수문자" value={login.userPassword} onChange={onChange} />
+                        <button type="submit">로그인</button>
+                    </form>
+                    <div className="findPw">
+                        <button type="button" onClick={() => setFindPw(findPw)}>로그인으로</button>
+                    </div>
+                </>
+            )}
         </MemberWrapper>
     )
 }

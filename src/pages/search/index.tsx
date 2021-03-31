@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { ItemList, SearchBar } from '@components/common'
@@ -18,7 +18,6 @@ const Search:React.FC = () => {
     const [ category, setCategory ] = useState<any>('attraction');
     const [ keyword, setKeyword ] = useState<any>('');
     const [ currentData, setCurrentData ] = useState<any>({});
-    const [ searchingState, setSearchingState ] = useState<boolean>(false);
 
     const handleSubmit = () => {
         const qsParam = decodeURIComponent(qs.stringify({category: category, keyword: keyword}));
@@ -66,12 +65,8 @@ const Search:React.FC = () => {
         }
     }
 
-    const initialize = async () => {
-        await fetchSearch();
-    };
-
     useEffect(() => {
-        initialize();
+        fetchSearch();
     }, []);
 
     return (
@@ -88,7 +83,6 @@ const Search:React.FC = () => {
                 data={currentData}
                 type="list"
                 search
-                searchingState={searchingState}
             />
         </SearchWrapper>
     )

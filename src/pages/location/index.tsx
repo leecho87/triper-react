@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { Map } from '@components/location';
 
 declare global {
@@ -16,7 +16,7 @@ const Location:React.FC = () => {
 			center: new kakao.maps.LatLng(33.450701, 126.570667),
 			level: 3
 		};
-		const map = new kakao.maps.Map(container, options);
+		new kakao.maps.Map(container, options);
     }
 
     useEffect(() => {
