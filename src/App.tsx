@@ -1,6 +1,13 @@
+import { CssBaseline } from '@mui/material';
+import Nav from "components/common/Nav"
+
 const App = () => {
   return (
-    <div>App</div>
+    <>
+      <CssBaseline />
+      <div>App</div>
+      <Nav />
+    </>
   )
 }
 
