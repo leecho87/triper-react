@@ -1,15 +1,13 @@
 import { CssBaseline } from '@mui/material';
-import Nav from "components/common/Nav"
-import { apiDefaultParams } from 'constants/apis';
+import Routes from 'routes/Routes';
+
+import "./App.css";
 
 const App = () => {
-  console.log('APP', apiDefaultParams);
-  
   return (
     <>
       <CssBaseline />
-      <div>App</div>
-      <Nav />
+      <Routes />
     </>
   )
 }
