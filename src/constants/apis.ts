@@ -16,9 +16,3 @@ export const apis = {
     
 }
 
-export const apiDefaultParams = {
-    'apiKey' : process.env.REACT_APP_TOUR_BASE_URL,
-    'MobileOS': 'ETC',
-    'MobileApp': 'AppTest',
-    '_type': 'json'
-}

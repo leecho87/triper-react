@@ -1,7 +1,23 @@
 import axios from "axios";
 
-export const fetchApi = axios.create({
-  baseURL: process.env.REACT_APP_TOUR_API_URL,
-  withCredentials: true
+const axiosInstance = axios.create({
+  baseURL: "http://apis.data.go.kr/B551011/KorService/",
 });
 
+interface IFetchApiProps {
+  method: string;
+  url: string;
+  params?: object;
+}
+
+export const fetchApi = async ({method, url, params}: IFetchApiProps) => {
+  try {
+    return await axiosInstance({
+      method: method,
+      url: `${url}?serviceKey=${process.env.REACT_APP_TOUR_ENCODE_KEY}&MobileOS=ETC&MobileApp=AppTest&_type=json`,
+      data: params,
+    });
+  } catch (error) {
+    console.error(error);
+  }
+}
