@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { fetchApi } from "utils/fetchApi";
+import { useMain } from "hooks/main/useMain";
 
 interface IAreaCodeProps {
     code: string;
@@ -8,30 +8,22 @@ interface IAreaCodeProps {
 }
 
 const MainPage = () => {
-    const [area, setArea] = useState([]);
+    const [areaCode, setAreaCode] = useState(null);
+    const controller = useMain();
 
-    const fetchAreaCode = async () => {
-        const data = await fetchApi({
-            method: "get",
-            url: "/areaCode",
-        });
-        const { item } = data?.data.response.body.items;
-        
-        setArea(item);
+
+    const handleGetAreaCode = async () => {
+        const items = await controller.fetchAreaCode();
+        console.log('[handleGetAreaCode]', items)
     }
 
     useEffect(() => {
-        fetchAreaCode();
+        handleGetAreaCode();
     }, [])
 
     return (
         <>
-            <h1>MainPage</h1>
-            <ul>
-                {area?.map((item: IAreaCodeProps) => (
-                    <li key={item.code}>{item.name}</li>
-                ))}
-            </ul>
+            <p>main</p>
         </>
     )
 }
