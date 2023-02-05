@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { NavLink as RouterLink } from "react-router-dom";
-import { Box, Grid as MuiGrid, Typography } from "@mui/material";
-import { Home, Search, Paid, Timeline, Person } from "@mui/icons-material";
+import { Box, Grid as MuiGrid } from "@mui/material";
+import { Home, Search, Tour, Person } from "@mui/icons-material";
 
 interface ILinkProps {
     to: string;
@@ -33,12 +33,9 @@ const Link = ({to, children, end}: ILinkProps) => {
         justify-content:center;
         align-items:center;
         height:100%;
-        svg {
-            font-size:1rem;
-        }
         p {
             margin-top:4px;
-            font-size:18px;
+            font-size:14px;
             color:#999;
         }
         &.active {
@@ -75,15 +72,9 @@ const Nav = () => {
                     </Link>
                 </GridItem>
                 <GridItem>
-                    <Link to="/cashbook">
-                        <Paid fontSize="small" color="disabled" />
-                        <p>가계부</p>
-                    </Link>
-                </GridItem>
-                <GridItem>
-                    <Link to="/course">
-                        <Timeline fontSize="small" color="disabled" />
-                        <p>내코스</p>
+                    <Link to="/myTour">
+                        <Tour fontSize="small" color="disabled" />
+                        <p>내여행</p>
                     </Link>
                 </GridItem>
                 <GridItem>

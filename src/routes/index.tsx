@@ -3,7 +3,7 @@ import LoginPage from 'pages/login/LoginPage'
 // 컨텐츠 컴포넌트
 import MainPage from 'pages/main/MainPage'
 import SearchPage from 'pages/search/SearchPage'
-import CashBookPage from 'pages/cashbook/CashBookPage'
+import MyTourPage from 'pages/myTour/MyTourPage'
 
 export const AuthRoutes = [
   {
@@ -11,7 +11,7 @@ export const AuthRoutes = [
     name: "로그인",
     component: LoginPage
   }
-]
+];
 
 export const TourRoutes = [
   {
@@ -25,8 +25,8 @@ export const TourRoutes = [
     component: SearchPage
   },
   {
-    path: "/cashbook",
-    name: "가계부",
-    component: CashBookPage
+    path: "/MyTour",
+    name: "내여행",
+    component: MyTourPage
   }
 ];

@@ -10,19 +10,30 @@ const Title = styled(Typography)`
     justify-content:center;
     align-items:center;
     gap:8px;
-    padding:10px;
-    font-size:22px;
+    padding:20px;
+    font-size:20px;
     font-weight:600;
-    span {
-      font-size:16px;
-      color:#999;
+    div {
+      position:relative;
+      white-space:nowrap;
+      span {
+        position:absolute;
+        left:-80%;
+        top:50%;
+        font-size:13px;
+        color:#999;
+        transform:translateY(-50%);
+      }
     }
 `
 
 const PageTitle = ({ title }: IPageTitleProps) => {
   return (
     <Title variant="h1">
-      <span>포켓투어</span> {title}
+      <div>
+        {title}
+        <span>포켓투어</span>
+      </div>
     </Title>
   );
 };
