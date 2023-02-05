@@ -3,6 +3,12 @@ import { NavLink as RouterLink } from "react-router-dom";
 import { Box, Grid as MuiGrid, Typography } from "@mui/material";
 import { Home, Search, Paid, Timeline, Person } from "@mui/icons-material";
 
+interface ILinkProps {
+    to: string;
+    children: any;
+    end?: boolean;
+}
+
 const GridItem = ({children}: any) => {
     const Grid = styled(MuiGrid)`
         height:64px;
@@ -20,21 +26,21 @@ const GridItem = ({children}: any) => {
     )
 }
 
-interface ILinkProps {
-    to: string;
-    children: any;
-    end?: boolean;
-}
-
 const Link = ({to, children, end}: ILinkProps) => {
     const NavLink = styled(RouterLink)`
-        display:block;
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+        align-items:center;
         height:100%;
-        padding:8px 0 0;
-        text-decoration:none;
-        font-size:15px;
-        color:#000;
-        
+        svg {
+            font-size:1rem;
+        }
+        p {
+            margin-top:4px;
+            font-size:18px;
+            color:#999;
+        }
         &.active {
             font-weight:bold;
             color: red;
@@ -59,31 +65,31 @@ const Nav = () => {
                 <GridItem>
                     <Link to="/" end>
                         <Home fontSize="small" color="primary" />
-                        <Typography>홈</Typography>
+                        <p>홈</p>
                     </Link>
                 </GridItem>
                 <GridItem>
                     <Link to="/search">
                         <Search fontSize="small" color="disabled" />
-                        <Typography>검색</Typography>
+                        <p>검색</p>
                     </Link>
                 </GridItem>
                 <GridItem>
                     <Link to="/cashbook">
                         <Paid fontSize="small" color="disabled" />
-                        <Typography>가계부</Typography>
+                        <p>가계부</p>
                     </Link>
                 </GridItem>
                 <GridItem>
                     <Link to="/course">
                         <Timeline fontSize="small" color="disabled" />
-                        <Typography>내코스</Typography>
+                        <p>내코스</p>
                     </Link>
                 </GridItem>
                 <GridItem>
                     <Link to="/info">
                         <Person fontSize="small" color="disabled" />
-                        <Typography>내정보</Typography>
+                        <p>내정보</p>
                     </Link>
                 </GridItem>
             </MuiGrid>

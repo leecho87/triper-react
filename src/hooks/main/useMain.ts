@@ -4,7 +4,7 @@ export const useMain = () => {
   const fetchAreaCode = () => {
     const res = api.getAreaCode()
       .then((response) => {
-        const data = response?.data;
+        const data = response?.data.response.body.items;
         return data;
       })
       .catch((error) => {

@@ -1,9 +1,25 @@
-@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dongle:wght@400;700&display=swap');
 
+* {
+  box-sizing: border-box;
+  margin:0;
+  padding:0;
+  font-family: 'Dongle',sans-serif;
+}
 html, body, #root {
+  font-size:22px;
   min-height:100vh;
-  font-family: 'Nanum Gothic', sans-serif;
+  font-family: 'Dongle',sans-serif;
 }
 #root {
   min-height:100vh;
+}
+ul,ol {
+  list-style: none;
+}
+p {
+  font-family:inherit;
+}
+a {
+  text-decoration: none;
 }

@@ -1,5 +1,14 @@
 # 여행가이드
 
+## 패키지
+- material
+- react
+- typescript
+- firebase
+- oAuth
+- react-query
+- axios
+- aws s3, cloudfront, codebuild
 
 ## 작업내역
 
