@@ -33,7 +33,7 @@ export const fetchApi = async ({method, url, params}: IFetchApiProps) => {
         data: params,
       });
     }
-  } catch (error) {
+  } catch (error: any) {
     console.error(error);
   }
 }

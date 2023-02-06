@@ -1,4 +1,8 @@
-export const citiesInfo = {
+interface citiesInfoTypes {
+  [key: string]: any
+}
+
+export const citiesInfo: citiesInfoTypes = {
     '1': [{
       code: 1,
       areaName: "강남구",

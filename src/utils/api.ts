@@ -24,12 +24,6 @@ const api = {
       method: "get",
       url: "/searchStay"
     })
-  },
-  getFet() {
-    return fetchApi({
-      method: "get",
-      url: "/detailPetTour"
-    })
   }
 }
 

@@ -32,24 +32,30 @@ const MainPage = () => {
     const [areaCode, setAreaCode] = useState<IAreaCodeProps[] | null>(null);
     const [festival, setFestival] = useState<any>(null);
     const [stay, setStay] = useState<any>(null);
-    const [fet, setFet] = useState<any>(null);
+    const [selectedArea, setSelectedArea] = useState<string>("1");
+
     const controller = useMain();
+
+    const handleAreaChange = (areaCode:string) => {
+        setSelectedArea(areaCode);
+    }
 
     useEffect(() => {
         if (!areaCode && controller) {
-            const fetchingData = async () => {
-                const { item: areaCodeResponse } = await controller.fetchAreaCode();
-                const { item: festivalResponse } = await controller.fetchFestival();
-                const { item: stayResponse } = await controller.fetchStay();
-                // const { item: fetResponse } = await controller.fetchFet();
-                
-                console.log('[festivalResponse]', festivalResponse)
-                console.log('[stayResponse]', stayResponse)
-                // console.log('[fetResponse]', fetResponse)
-                
-                setAreaCode(areaCodeResponse);
-            }
-            fetchingData();
+            axios.all([
+                controller.fetchAreaCode(),
+                controller.fetchFestival(),
+                controller.fetchStay()
+            ])
+            .then(axios.spread((...result) => {
+                setAreaCode(result[0].item);
+                setFestival(result[1].item);
+                setStay(result[2].item);
+                setSelectedArea(result[0].item[0].code)
+            }))
+            .catch((error) => {
+                console.log(error)
+            });
         }
     }, [areaCode, controller])
 
@@ -59,7 +65,11 @@ const MainPage = () => {
             <SearchLinkBox>
                 <Link to="/search">어디가 궁금하세요?</Link>
             </SearchLinkBox>            
-            <CitiesList data={areaCode} />
+            <CitiesList
+                data={areaCode}
+                onChange={handleAreaChange}
+                selected={selectedArea}
+            />
         </>
     )
 }

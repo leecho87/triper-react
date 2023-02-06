@@ -8,7 +8,10 @@ interface IAreaCodeProps {
 
 interface ICitiesListProps {
     data?: IAreaCodeProps[] | null
+    onChange: (arg: string) => void;
+    selected: string;
 }
+
 
 const CitiesListWrap = styled.ul`
     display:inline-flex;
@@ -43,17 +46,39 @@ const CitiesListWrap = styled.ul`
         }
     }
 `;
+const LocalList = styled.ul`
+    position:relative;
+    display:flex;
+    flex-wrap:wrap;
+    padding:8px;
+    gap: 8px;
+`;
 
-const CitiesList = ({ data }: ICitiesListProps) => {
+const CitiesList = ({
+    data,
+    onChange,
+    selected = "1"
+}: ICitiesListProps) => {
     return (
-        <CitiesListWrap>
-        {data?.map((item: IAreaCodeProps, index: number) => (
-            <li key={`areaCode-${index}`}>
-                <img src={`/images/city_${item.code}.jpg`} alt={item.name} />
-                <span>{item.name.includes("세종") ? "세종시" : item.name}</span>
-            </li>
-        ))}
-        </CitiesListWrap>
+        <>
+            <h2>도시</h2>
+            <CitiesListWrap>
+            {data?.map((item: IAreaCodeProps, index: number) => (
+                <li key={`areaCode-${index}`} onClick={() => onChange(item.code)}>
+                    <img src={`/images/city_${item.code}.jpg`} alt={item.name} />
+                    <span>{item.name.includes("세종") ? "세종시" : item.name}</span>
+                </li>
+            ))}
+            </CitiesListWrap>
+            <h2>지자체</h2>
+            {selected && (
+            <LocalList>
+                {citiesInfo[selected].map((item: any, index: number) => (
+                    <li key={index}><a href={item.areaHomepage} target="_blank" rel="noreferrer">{item.areaName}</a></li>
+                ))}
+            </LocalList>
+            )}
+        </>
     )
 }
 

@@ -34,21 +34,9 @@ export const useMain = () => {
     });
   }
 
-  const fetchFet = () => {
-    return api.getFet()
-    .then((response) => {
-      const data = response?.data.response.body.items;
-      return data;
-    })
-    .catch((error) => {
-      console.log('error', error);
-    });
-  }
-
   return {
     fetchAreaCode,
     fetchFestival,
-    fetchStay,
-    fetchFet
+    fetchStay
   }
 }
