@@ -16,10 +16,10 @@
 }
 html, body, #root {
   font-size:16px;
-  min-height:100vh;
+  height:100vh;
 }
 #root {
-  min-height:100vh;
+  height:100vh;
 }
 ul,ol {
   list-style: none;
@@ -29,4 +29,8 @@ p {
 }
 a {
   text-decoration: none;
+}
+img {
+  width:100%;
+  vertical-align:top;
 }

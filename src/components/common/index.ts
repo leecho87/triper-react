@@ -1,9 +1,11 @@
-import ListWrap from "./ListWrap";
+import List from "./List";
 import Nav from "./Nav";
 import PageTitle from "./PageTitle";
+import CategoryHead from "./CategoryHead";
 
 export {
-    ListWrap,
+    List,
     Nav,
-    PageTitle
+    PageTitle,
+    CategoryHead
 }

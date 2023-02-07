@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { CategoryHead } from "components/common";
 import { citiesInfo } from "constants/Cities";
 interface IAreaCodeProps {
     code: string;
@@ -16,11 +17,10 @@ interface ICitiesListProps {
 const CitiesListWrap = styled.ul`
     display:inline-flex;
     width:100%;
-    margin-top:20px;
     flex-wrap:nowrap;
     overflow-x:auto;
     gap:8px;
-    padding:0 8px;
+    margin-top:8px;
     &::-webkit-scrollbar {
         display: none;
     }
@@ -44,14 +44,23 @@ const CitiesListWrap = styled.ul`
             color:#fff;
             text-shadow:var(--main-color) 1px 0 6px;
         }
+        &.active {
+            box-shadow: 0 0 0 5px #000 inset; 
+        }
     }
 `;
 const LocalList = styled.ul`
     position:relative;
     display:flex;
     flex-wrap:wrap;
-    padding:8px;
-    gap: 8px;
+    gap: 4px;
+    margin-top:8px;
+    li {
+        font-size:12px;
+        a {
+            color:#000;
+        }
+    }
 `;
 
 const CitiesList = ({
@@ -61,16 +70,16 @@ const CitiesList = ({
 }: ICitiesListProps) => {
     return (
         <>
-            <h2>도시</h2>
+            <CategoryHead title="도시" desc="둘러 볼 도시를 선택해 주세요" />
             <CitiesListWrap>
             {data?.map((item: IAreaCodeProps, index: number) => (
-                <li key={`areaCode-${index}`} onClick={() => onChange(item.code)}>
+                <li key={`areaCode-${index}`} onClick={() => onChange(item.code)} className={selected === item.code ? "active" : undefined}>
                     <img src={`/images/city_${item.code}.jpg`} alt={item.name} />
                     <span>{item.name.includes("세종") ? "세종시" : item.name}</span>
                 </li>
             ))}
             </CitiesListWrap>
-            <h2>지자체</h2>
+            <CategoryHead title="지자체" desc="선택한 도시의 지자체 정보입니다" />
             {selected && (
             <LocalList>
                 {citiesInfo[selected].map((item: any, index: number) => (

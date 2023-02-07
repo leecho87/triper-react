@@ -9,7 +9,9 @@ const TourLayoutWrap = styled.div`
 `;
 
 const Container = styled.div`
-  flex: 1
+  flex: 1;
+  overflow-y:auto;
+  padding-bottom:20px;
 `;
 
 const TourLayout = () => {

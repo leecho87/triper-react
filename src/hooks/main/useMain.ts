@@ -1,8 +1,9 @@
 import api from "utils/api"
 
 export const useMain = () => {
-  const fetchAreaCode = () => {
-    return api.getAreaCode()
+
+  const fetchAreaCode = (params: any) => {
+    return api.getAreaCode(params)
       .then((response) => {
         const data = response?.data.response.body.items;
         return data;
@@ -12,8 +13,8 @@ export const useMain = () => {
       });
   }
 
-  const fetchFestival = () => {
-    return api.getFestival()
+  const fetchFestival = (params: any) => {
+    return api.getFestival(params)
     .then((response) => {
       const data = response?.data.response.body.items;
       return data;
@@ -23,8 +24,19 @@ export const useMain = () => {
     });
   }
 
-  const fetchStay = () => {
-    return api.getStay()
+  const fetchStay = (params: any) => {
+    return api.getStay(params)
+    .then((response) => {
+      const data = response?.data.response.body.items;
+      return data;
+    })
+    .catch((error) => {
+      console.log('error', error);
+    });
+  }
+
+  const fetchAreaBased = (params: any) => {
+    return api.getAreeBased(params)
     .then((response) => {
       const data = response?.data.response.body.items;
       return data;
@@ -37,6 +49,7 @@ export const useMain = () => {
   return {
     fetchAreaCode,
     fetchFestival,
-    fetchStay
+    fetchStay,
+    fetchAreaBased
   }
 }

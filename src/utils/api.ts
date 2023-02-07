@@ -1,28 +1,32 @@
 import { fetchApi } from "./fetchApi"
 
 const api = {
-  getAreaCode() {
+  getAreaCode(params: any) {
     return fetchApi({
       method: "get",
       url: "/areaCode",
-      params: {
-        numOfRows: 17
-      }
+      params
     })
   },
-  getFestival() {
+  getFestival(params: any) {
     return fetchApi({
       method: "get",
       url: "/searchFestival",
-      params: {
-        eventStartDate:new Date()
-      }
+      params: params
     })
   },
-  getStay() {
+  getStay(params: any) {
     return fetchApi({
       method: "get",
-      url: "/searchStay"
+      url: "/searchStay",
+      params: params
+    })
+  },
+  getAreeBased(params: any) {
+    return fetchApi({
+      method: "get",
+      url: "/areaBasedList",
+      params: params
     })
   }
 }
