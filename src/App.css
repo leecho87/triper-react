@@ -19,6 +19,8 @@ html, body, #root {
   height:100vh;
 }
 #root {
+  position:relative;
+  overflow:hidden;
   height:100vh;
 }
 ul,ol {
@@ -33,4 +35,15 @@ a {
 img {
   width:100%;
   vertical-align:top;
+}
+.search-entered {
+  right:0 !important;
+  transition: right .15s;
+}
+.search-exiting { opacity: 0 }
+.search-exited { opacity: 0 }
+
+.detail-entered {
+  bottom:64px !important;
+  transition: bottom .15s;
 }

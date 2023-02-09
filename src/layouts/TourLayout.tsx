@@ -16,7 +16,7 @@ const Container = styled.div`
 
 const TourLayout = () => {
   return (
-    <TourLayoutWrap>
+    <TourLayoutWrap className='TourLayoutWrap'>
       <Container>
         <Outlet />
       </Container>

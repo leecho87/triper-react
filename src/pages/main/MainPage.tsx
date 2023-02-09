@@ -71,6 +71,7 @@ const MainPage = () => {
 
     return (
         <Wrap>
+            <Link to="/detail">상세</Link>
             <PageTitle title="TRIPER" />
             <SearchLinkBox>
                 <Link to="/search">어디가 궁금하세요?</Link>

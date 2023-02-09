@@ -3,7 +3,6 @@ import { Routes as ReactRoutes, Route } from "react-router-dom";
 import { AuthRoutes, TourRoutes } from "routes";
 import AuthLayout from 'layouts/AuthLayout'
 import TourLayout from 'layouts/TourLayout'
-
 import { RouteType } from "types/RouteType";
 
 const generateRoutes = (Layout: React.ElementType, routes: RouteType[]) => {
