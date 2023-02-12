@@ -57,7 +57,7 @@ const Link = ({to, children, end}: ILinkProps) => {
 
 const Nav = () => {
     return (
-        <Box>
+        <Box style={{ background: "#fff" }}>
             <MuiGrid container>
                 <GridItem>
                     <Link to="/" end>

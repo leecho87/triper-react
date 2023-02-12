@@ -27,7 +27,7 @@ interface ICategoryHeadProps {
 
 const CategoryHead = ({ title, desc, path }: ICategoryHeadProps) => {
   return (
-    <Grid container alignItems="center" style={{ marginTop: 20 }}>
+    <Grid container alignItems="center">
       <Grid item>
         <Text tag="h2">{title}</Text>
       </Grid>

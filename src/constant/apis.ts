@@ -11,6 +11,17 @@
     10	detailInfo	반복정보조회 (상세정보3)
     11	detailImage	이미지정보조회 (상세정보4)
     12	areaBasedSyncList	국문관광정보 동기화 목록 조회
+
+
+
+    관광지	12
+    문화시설	14
+    행사/공연/축제	15
+    여행코스	25
+    레포츠	28
+    숙박	32
+    쇼핑	38
+    음식점	39
  */
 export const apis = {
     

@@ -6,7 +6,8 @@
   font-weight:normal;
 }
 :root {
-  --main-color: #2b6df4
+  --main-color: #2b6df4;
+  --sub-color: #999;
 }
 * {
   box-sizing: border-box;
@@ -19,8 +20,6 @@ html, body, #root {
   height:100vh;
 }
 #root {
-  position:relative;
-  overflow:hidden;
   height:100vh;
 }
 ul,ol {
@@ -38,12 +37,17 @@ img {
 }
 .search-entered {
   right:0 !important;
-  transition: right .15s;
+  transition: right .25s;
 }
-.search-exiting { opacity: 0 }
-.search-exited { opacity: 0 }
-
+.search-exiting { 
+  right:-100% !important;
+  transition: right .25s;
+}
 .detail-entered {
   bottom:64px !important;
-  transition: bottom .15s;
+  transition: bottom .25s;
+}
+.detail-entered {
+  bottom:-100% !important;
+  transition: bottom .25s;
 }
