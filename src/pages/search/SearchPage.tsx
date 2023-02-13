@@ -1,9 +1,14 @@
-import { useState, useRef } from "react"; 
-import { Grid, Button } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { useState, useRef, useEffect } from "react"; 
 import styled from "@emotion/styled";
-import { CSSTransition } from "react-transition-group";
+import { Box, Grid, Button } from "@mui/material";
 import { ArrowBackIos, Search } from '@mui/icons-material';
+import { useNavigate } from "react-router-dom";
+import { CSSTransition } from "react-transition-group";
+
+import SearchList from "components/search/SearchList";
+
+import { useSearch } from "hooks/search/useSearch";
+
 
 const SearchWrap = styled.div`
     position:absolute;
@@ -28,18 +33,43 @@ const SearchBar = styled.div`
         line-height:34px;
         color:#000;
     }
-`
+`;
+
+interface ISearchChangeEvent {
+    isComposing: boolean;
+}
 
 const SearchPage = () => {
-    const [inProps, setInProps] = useState(true)
+    const [inProps, setInProps] = useState(true);
+    const [keyword, setKeyword] = useState("");
+    const [searchData, setSearchData] = useState(null);
     const navigate = useNavigate();
     const nodeRef = useRef(null);
-    
+    const controller = useSearch();
+
     const handleHistoryBack = () => {
         setInProps(false);
         setTimeout(() => {
             navigate(-1)
         }, 250)
+    };
+
+    const handleUpdateKeyword = (event: React.ChangeEvent<HTMLInputElement> | any) => {
+        if (event.isComposing) return;
+
+        setKeyword(event.target.value);
+    }
+
+    const handleSearch = async () => {
+        try {
+            const result = await controller.onSearch({
+                keyword: keyword,
+                numOfRows: 20
+            });
+            setSearchData(result.item);
+        } catch (error) {
+            console.log('error', error)
+        }
     }
 
     return (
@@ -54,15 +84,23 @@ const SearchPage = () => {
                     </Grid>
                     <Grid item xs>
                         <SearchBar>
-                            <input type="text" />
+                            <input
+                                type="text"
+                                value={keyword}
+                                onChange={(event) => handleUpdateKeyword(event)}
+                                
+                            />
                         </SearchBar>
                     </Grid>
                     <Grid item>
-                        <Button>
+                        <Button onClick={() => handleSearch()}>
                             <Search />
                         </Button>
                     </Grid>
                 </Grid>
+                <Box>
+                    <SearchList data={searchData} />
+                </Box>
             </SearchWrap>
         )}
         </CSSTransition>

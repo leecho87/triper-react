@@ -28,6 +28,13 @@ const api = {
       url: "/areaBasedList",
       params: params
     })
+  },
+  getSearch(params: any) {
+    return fetchApi({
+      method: "get",
+      url: "/searchKeyword",
+      params: params
+    })
   }
 }
 
